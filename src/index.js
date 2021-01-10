@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById("btn").addEventListener('click', accelDisp);
   document.getElementById("btn").addEventListener('click', fgxDisp);
   document.getElementById("btn").addEventListener('click', fnDisp);
-  document.getElementById("btn").addEventListener('click', fnDisp);
+  document.getElementById("btn").addEventListener('click', ffDisp);
   document.getElementById("btn").addEventListener('click', netFDisp);
 });
 
