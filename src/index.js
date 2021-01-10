@@ -38,6 +38,11 @@ drawObject()
 
 document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById("btn").addEventListener('click', userInputs);
+  document.getElementById("btn").addEventListener('click', timerReset);
+  document.getElementById("btn").addEventListener('click', timer);
+  document.getElementById("btn").addEventListener('click', intervalSet);
+  document.getElementById("btn").addEventListener('click', veloDisp);
+  document.getElementById("btn").addEventListener('click', accelDisp);
 });
 
 
@@ -55,17 +60,50 @@ let oppProp = trigOpp/rampLength;
     var velocity = initVelocity;
     var position = 0;
 
+var currTime = 0;
+var dispTime = 0;
+var intervalSetter;
+var intervalSetter2;
+var dispVelo = 0;
+var acceleration;
+var dispAccel = 0;
+
+var timer = function(){
+
+  currTime = currTime + 0.01
+  dispTime=parseFloat(currTime.toFixed(4));
+  document.getElementById("timeSet").innerHTML = `t: ${dispTime}`;
+
+}
+
+function timerReset (){
+  currTime = 0;
+  dispTime = 0;
+}
+
+
+var intervalSet = function(){
+
+intervalSetter = setInterval(timer, 10);
+intervalSetter2 = setInterval(veloDisp, 10);
+} 
+
+
+var timerClr = function(){
+  
+  clearInterval(intervalSetter2);
+  clearInterval(intervalSetter);
+}
+
+function veloDisp(){
+  dispVelo=parseFloat(velocity.toFixed(2));
+  document.getElementById("veloDisp").innerHTML = `v: ${dispVelo}m/s`;
+}
 
 
 
-
-
-
-
-
-
-
-
+intervalSet();
+timer();
 
 
 incPlane();
@@ -94,11 +132,16 @@ let netGravityX = fGravityX-fFriction; // Net Force of Gravity X
 if (netGravityX < 0){
   netGravityX = 0;
 }//console.log(angleElevRad);
-let acceleration = netGravityX/mass; // Acceleration of the object in m/s^2
+acceleration = netGravityX/mass; // Acceleration of the object in m/s^2
 //console.log(fNormal, fFriction, netGravityX, acceleration)
 return acceleration;
 
 };
+
+function accelDisp(){
+  dispAccel=parseFloat(acceleration.toFixed(2));
+  document.getElementById("accelDisp").innerHTML = `a: ${dispAccel}m/s<sup>2</sup>`;
+}
 
 function integrate()
 {
@@ -112,7 +155,7 @@ return(position);
 
 }
 
-
+accelDisp();
 
 //console.log(delta);
 
@@ -155,6 +198,7 @@ if (canvas.getContext)
     context.fill();
     delta = 0;
     cancelAnimationFrame(anim);
+    timerClr();
           }
       
 

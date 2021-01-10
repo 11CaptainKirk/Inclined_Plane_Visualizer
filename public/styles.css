@@ -1,13 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   margin: 100;
+  font-family: poppins, sans-serif;
+  font-weight: 100;
 }
 
 body {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 0.5fr 2fr;
+  grid-template-rows: 0.25fr 2fr;
   margin-left: 3px;
   margin-right: 3px;
+  position: relative;
 }
 #canvas {
   grid-row: 2/3;
@@ -15,6 +20,15 @@ body {
   border: solid 1px blue;
   width: 100%;
   min-width: 400px;
+}
+.stats {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  padding: 15px;
+  min-width: 150px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .titlediv {
   grid-row: 1/2;
