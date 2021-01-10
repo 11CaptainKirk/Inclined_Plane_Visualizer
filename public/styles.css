@@ -24,11 +24,16 @@ body {
 .stats {
   grid-row: 2/3;
   grid-column: 2/3;
-  padding: 15px;
-  min-width: 150px;
+  padding: 10px;
+  min-width: 100px;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+h2 {
+  font-size: 2vh;
+  padding: 0;
+  margin: 0;
 }
 .titlediv {
   grid-row: 1/2;

@@ -1,12 +1,12 @@
 var delta = 0;
 
 
-let mass = 0.5; // Mass in Kg
-let coefFrict = 0.015; // Coefficient of Friction
+let mass = 3; // Mass in Kg
+let coefFrict = 0.53; // Coefficient of Friction
 let rampLength = 600; // Length of the ramp surface in m
 let angleElevDeg = 30; // Angle of Elevation in Degrees
 let initVelocity = 0; // Initial Velocity in m/s
-let gravity = 5.81;// Accel due to Gravity in m/s^2
+let gravity = 9.81;// Accel due to Gravity in m/s^2
 console.log(gravity)
 let deltaVelocity = 0;
 let deltaPosition = 0;
@@ -19,7 +19,7 @@ mass = document.getElementById("massInput").value || 3;
 coefFrict = document.getElementById("coefFrictInput").value || 0.53;
 rampLength = document.getElementById("rampLengthInput").value || 600;
 angleElevDeg = document.getElementById("angleElevInput").value || 30;
-initVelocity = document.getElementById("initVelocityInput").value || 0
+//initVelocity = document.getElementById("initVelocityInput").value || 0
 gravity = document.getElementById("gravityInput").value || 9.81;
 
 delta = 0;
@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById("btn").addEventListener('click', intervalSet);
   document.getElementById("btn").addEventListener('click', veloDisp);
   document.getElementById("btn").addEventListener('click', accelDisp);
+  document.getElementById("btn").addEventListener('click', fgxDisp);
+  document.getElementById("btn").addEventListener('click', fnDisp);
+  document.getElementById("btn").addEventListener('click', fnDisp);
+  document.getElementById("btn").addEventListener('click', netFDisp);
 });
 
 
@@ -67,6 +71,14 @@ var intervalSetter2;
 var dispVelo = 0;
 var acceleration;
 var dispAccel = 0;
+var dispFGX = 0;
+var fGravityX;
+var dispFn;
+var dispFf;
+var dispNetF;
+var fNormal;
+var fFriction;
+var netGravityX;
 
 var timer = function(){
 
@@ -125,10 +137,10 @@ oppProp = trigOpp/rampLength;
 
 
 
-let fNormal = (mass*gravity)*(Math.cos(angleElevRad)); // Normal Force in Newtons
-let fFriction = fNormal*coefFrict; // Force of Friction in Newtons
-let fGravityX = (mass*gravity)*(Math.sin(angleElevRad)); // Gravity X before friction
-let netGravityX = fGravityX-fFriction; // Net Force of Gravity X
+fNormal = (mass*gravity)*(Math.cos(angleElevRad)); // Normal Force in Newtons
+fFriction = fNormal*coefFrict; // Force of Friction in Newtons
+fGravityX = (mass*gravity)*(Math.sin(angleElevRad)); // Gravity X before friction
+netGravityX = fGravityX-fFriction; // Net Force of Gravity X
 if (netGravityX < 0){
   netGravityX = 0;
 }//console.log(angleElevRad);
@@ -141,6 +153,22 @@ return acceleration;
 function accelDisp(){
   dispAccel=parseFloat(acceleration.toFixed(2));
   document.getElementById("accelDisp").innerHTML = `a: ${dispAccel}m/s<sup>2</sup>`;
+}
+function fgxDisp(){
+  dispFGX=parseFloat(fGravityX.toFixed(2));
+  document.getElementById("fgxDisp").innerHTML = `Fgx: ${dispFGX}N`;
+}
+function fnDisp(){
+  dispFn=parseFloat(fNormal.toFixed(2));
+  document.getElementById("fnDisp").innerHTML = `Fn: ${dispFn}N`;
+}
+function ffDisp(){
+  dispFf=parseFloat(fFriction.toFixed(2));
+  document.getElementById("ffDisp").innerHTML = `Ff: ${dispFf}N`;
+}
+function netFDisp(){
+  dispNetF=parseFloat(netGravityX.toFixed(2));
+  document.getElementById("netFDisp").innerHTML = `ΣF: ${dispNetF}N`;
 }
 
 function integrate()
@@ -156,6 +184,10 @@ return(position);
 }
 
 accelDisp();
+fgxDisp();
+fnDisp();
+ffDisp();
+netFDisp();
 
 //console.log(delta);
 
