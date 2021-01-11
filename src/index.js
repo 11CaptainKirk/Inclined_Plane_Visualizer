@@ -7,23 +7,28 @@ Copyright 2021 Robert Kirk. All Rights Reserved.*/
 
 var delta = 0;  // these define global variables
 let mass = 3; // Mass in Kg
-let coefFrict = 0.43; // Coefficient of Friction
+let coefFrict = 0.25; // Coefficient of Friction
 let rampLength = 600; // Length of the ramp surface in m
 let angleElevDeg = 30; // Angle of Elevation in Degrees
 let initVelocity = 0; // Initial Velocity in m/s
 let gravity = 9.81;// Accel due to Gravity in m/s^2
 let deltaVelocity = 0;
 let deltaPosition = 0;
+let coefStatFrict = 0.4;
+let fstatFrict = 0;
+let netStat = 0;
+
 
 const userInputs = (ev)=>{    // USER INPUTS FUNCTION RUNS EVERY TIME THE RUN BUTTON IS CLICKED AND CALLS OTHER FUNCTIONS
 
   ev.preventDefault(); // stops form from submitting
 
 mass = document.getElementById("massInput").value || 3; // sets mass to input value or 3.
-coefFrict = document.getElementById("coefFrictInput").value || 0.43;  // sets coefficient of friction to input value or 0.43
+coefFrict = document.getElementById("coefFrictInput").value || 0.25;  // sets coefficient of friction to input value or 0.43
 rampLength = document.getElementById("rampLengthInput").value*100 || 600; // sets ramp length to input value times 100 or 600
 angleElevDeg = document.getElementById("angleElevInput").value || 30; // sets angle of elevation in degrees to input value or 30
 gravity = document.getElementById("gravityInput").value || 9.81; // sets gravity to input value or 9.81
+coefStatFrict = document.getElementById("coefStatFrictInput").value || 0.40;
 delta = 0;
 position = 0;  // these set starting values
 velocity = 0;
@@ -74,6 +79,7 @@ var netGravityX;
 
 
 
+
 var timer = function(){  //function to allow for time display. interval of 10ms.
 
   currTime = currTime + 0.01
@@ -120,10 +126,12 @@ function incPlane()     // recalculates values based on user setting
   adjProp = trigAdj/rampLength; // proportions
   oppProp = trigOpp/rampLength;
   fNormal = (mass*gravity)*(Math.cos(angleElevRad)); // Normal Force in Newtons
-  fFriction = fNormal*coefFrict; // Force of Friction in Newtons
+  fFriction = fNormal*coefFrict;  // Force of Friction in Newtons
+  fstatFrict = fNormal*coefStatFrict
+  netStat = fGravityX - fstatFrict 
   fGravityX = (mass*gravity)*(Math.sin(angleElevRad)); // Gravity X before friction
   netGravityX = fGravityX-fFriction; // Net Force of Gravity X
-    if (netGravityX < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
+    if (netStat < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
       netGravityX = 0;
     }
   acceleration = netGravityX/mass; // Acceleration of the object in m/s^2
