@@ -9,17 +9,22 @@
 </head>
 <body>
     <div class="titlediv">
-    <h1 class="title"> RK Inclined Plane Simulator</h1>
+    <h1 class="title">Inclined Plane Simulator</h1>
+</div>
+<div class="mainSite">
+    <a href="https://www.robertjkirk.com/">
+    <img src="./rklogo.png" alt="RK" >
+</a>
 </div>
     <canvas id="canvas" width="1000" height="700"></canvas>
     <div class="stats">
-      <h2 id="timeSet">t: 0.00</h2>
-      <h2 id="veloDisp">v: 0.0</h2>
+      <h2 id="timeSet">t: 0.00s</h2>
+      <h2 id="veloDisp">v: 0.0m/s</h2>
       <h2 id="accelDisp">a: 0.0m/s<sup>2</sup></sup></h2>
-      <h2 id="fgxDisp">Fgx: 0.0</h2>
-      <h2 id="fnDisp">Fn: 0.0</h2>
-      <h2 id="ffDisp">Ff: 0.0</h2>
-      <h2 id="netFDisp">ΣF: 0.0</h2>
+      <h2 id="fgxDisp">Fgx: 0.0N</h2>
+      <h2 id="fnDisp">Fn: 0.0N</h2>
+      <h2 id="ffDisp">Ff: 0.0N</h2>
+      <h2 id="netFDisp">ΣF: 0.0N</h2>
     </div>
 
     <form id="form">
@@ -31,13 +36,13 @@
     </div>
     <div class="seconddiv">
         <label>Coefficient of Friction</label><br>
-        <input    type="number" placeholder="Default: 0.53" id="coefFrictInput"><br>
+        <input    type="number" placeholder="Default: 0.43" id="coefFrictInput"><br>
         <label>Angle of Elevation (°)</label><br>
-        <input    type="number" placeholder="Angle of Elevation" id="angleElevInput"><br>
+        <input    type="number" placeholder="Default 30°" id="angleElevInput"><br>
     </div>
     <div class="thirddiv">
         <label>Inclined Plane Length (m)</label><br>
-        <input    type="number" placeholder="Default: 600" id="rampLengthInput"><br>
+        <input    type="number" placeholder="Default: 6" id="rampLengthInput"><br>
        <!--<label>Initial Velocity (m/s)</label><br>
         <input    type="number" placeholder="Default: 0" id="initVelocityInput">--> 
     </div>
