@@ -29,7 +29,7 @@ position = 0;  // these set starting values
 velocity = 0;
 deltaVelocity = 0;
 deltaPosition = 0;
-
+timerClr();
 integrate(); 
 incPlane();
 drawObject();
@@ -81,6 +81,8 @@ var timer = function(){  //function to allow for time display. interval of 10ms.
   document.getElementById("timeSet").innerHTML = `t: ${dispTime}s`;
 
 }
+
+timer();
 
 function timerReset (){ //resets timer when starting a new run.
   currTime = 0;
