@@ -5,3 +5,5 @@ Written in Javascript, Html and CSS for web use. Built upon a React.js framework
 Hosted with Amazon Web Services Amplify on rkirk.us
 Not intended for commercial use.
 Copyright 2021 Robert Kirk. All Rights Reserved.
+
+https://www.rkirk.us/
