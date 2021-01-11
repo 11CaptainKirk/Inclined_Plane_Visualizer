@@ -17,6 +17,7 @@ let deltaPosition = 0;
 let coefStatFrict = 0.4;
 let fstatFrict = 0;
 let netStat = 0;
+let appForce = 0;
 
 
 const userInputs = (ev)=>{    // USER INPUTS FUNCTION RUNS EVERY TIME THE RUN BUTTON IS CLICKED AND CALLS OTHER FUNCTIONS
@@ -29,6 +30,7 @@ rampLength = document.getElementById("rampLengthInput").value*100 || 600; // set
 angleElevDeg = document.getElementById("angleElevInput").value || 30; // sets angle of elevation in degrees to input value or 30
 gravity = document.getElementById("gravityInput").value || 9.81; // sets gravity to input value or 9.81
 coefStatFrict = document.getElementById("coefStatFrictInput").value || 0.40;
+appForce = document.getElementById("appInput").value || 0;
 delta = 0;
 position = 0;  // these set starting values
 velocity = 0;
@@ -38,7 +40,9 @@ timerClr();
 integrate(); 
 incPlane();
 drawObject();
+statffDisp()
 }
+
 
 document.addEventListener('DOMContentLoaded', ()=>{     //RUNS THESE FUNCTIONS WHEN THE BUTTON IS CLICKED //add to user inputs
   document.getElementById("btn").addEventListener('click', userInputs);
@@ -76,6 +80,7 @@ var dispNetF;
 var fNormal;
 var fFriction;
 var netGravityX;
+var dispstatFf;
 
 
 
@@ -128,12 +133,16 @@ function incPlane()     // recalculates values based on user setting
   fNormal = (mass*gravity)*(Math.cos(angleElevRad)); // Normal Force in Newtons
   fFriction = fNormal*coefFrict;  // Force of Friction in Newtons
   fstatFrict = fNormal*coefStatFrict
-  netStat = fGravityX - fstatFrict 
   fGravityX = (mass*gravity)*(Math.sin(angleElevRad)); // Gravity X before friction
-  netGravityX = fGravityX-fFriction; // Net Force of Gravity X
+  netStat = ((appForce/1)+fGravityX) - fstatFrict 
+  netGravityX = ((appForce/1)+fGravityX)-fFriction; // Net Force of Gravity X
     if (netStat < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
       netGravityX = 0;
     }
+    if (netGravityX < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
+      netGravityX = 0;
+    }
+    console.log(netGravityX)
   acceleration = netGravityX/mass; // Acceleration of the object in m/s^2
 return acceleration; // output the acceleration from the function
 }
@@ -151,7 +160,11 @@ function fnDisp(){ // display normal force with 2 decimals (equivalent to FGY)
 }
 function ffDisp(){ // display force of friction
   dispFf=parseFloat(fFriction.toFixed(2));
-  document.getElementById("ffDisp").innerHTML = `Ff: ${dispFf}N`;
+  document.getElementById("ffDisp").innerHTML = `Ff<sub>k</sub>: ${dispFf}N`;
+}
+function statffDisp(){ // display force of friction
+  dispstatFf=parseFloat(fstatFrict.toFixed(2));
+  document.getElementById("statffDisp").innerHTML = `Ff<sub>s</sub>: ${dispstatFf}N`;
 }
 function netFDisp(){ // display net force on the object
   dispNetF=parseFloat(netGravityX.toFixed(2));
@@ -173,6 +186,7 @@ fgxDisp();
 fnDisp();
 ffDisp();
 netFDisp();
+statffDisp()
 
 function drawObject(){  // Object is drawn on canvas
   var anim = requestAnimationFrame(drawObject); //Animation frame is requested to update drawing
