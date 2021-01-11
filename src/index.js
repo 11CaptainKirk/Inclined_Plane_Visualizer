@@ -1,33 +1,32 @@
-var delta = 0;
+/*    **Inclined Plane Visualizer by Robert Kirk**
+Created to visualize the effect of friction and mass (or lack thereof in the case of mass) on an object on an inclined plane.
+Written in Javascript, Html and CSS for web use. Built upon a React.js framework with a Node.js pseudo backend.
+Hosted with Amazon Web Services Amplify on rkirk.us 
+Not intended for commercial use.
+Copyright 2021 Robert Kirk. All Rights Reserved.*/
 
-
+var delta = 0;  // these define global variables
 let mass = 3; // Mass in Kg
 let coefFrict = 0.43; // Coefficient of Friction
 let rampLength = 600; // Length of the ramp surface in m
 let angleElevDeg = 30; // Angle of Elevation in Degrees
 let initVelocity = 0; // Initial Velocity in m/s
 let gravity = 9.81;// Accel due to Gravity in m/s^2
-console.log(gravity)
 let deltaVelocity = 0;
 let deltaPosition = 0;
 
 const userInputs = (ev)=>{    // USER INPUTS FUNCTION RUNS EVERY TIME THE RUN BUTTON IS CLICKED AND CALLS OTHER FUNCTIONS
-
-  ev.preventDefault();
-
-mass = document.getElementById("massInput").value || 3;
-coefFrict = document.getElementById("coefFrictInput").value || 0.43;
-rampLength = document.getElementById("rampLengthInput").value*100 || 600;
-angleElevDeg = document.getElementById("angleElevInput").value || 30;
-gravity = document.getElementById("gravityInput").value || 9.81;
-
+  ev.preventDefault(); // stops form from submitting
+mass = document.getElementById("massInput").value || 3; // sets mass to input value or 3.
+coefFrict = document.getElementById("coefFrictInput").value || 0.43;  // sets coefficient of friction to input value or 0.43
+rampLength = document.getElementById("rampLengthInput").value*100 || 600; // sets ramp length to input value times 100 or 600
+angleElevDeg = document.getElementById("angleElevInput").value || 30; // sets angle of elevation in degrees to input value or 30
+gravity = document.getElementById("gravityInput").value || 9.81; // sets gravity to input value or 9.81
 delta = 0;
-position = 0;
+position = 0;  // these set starting values
 velocity = 0;
 deltaVelocity = 0;
 deltaPosition = 0;
-
-
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{     //RUNS THESE FUNCTIONS WHEN THE BUTTON IS CLICKED //add to user inputs
@@ -141,7 +140,7 @@ function netFDisp(){ // display net force on the object
   document.getElementById("netFDisp").innerHTML = `ΣF: ${dispNetF}N`;
 }
 
-function integrate()  // Determine position of object based on acceleration through time. Performs psudo-double-integration. Acceleration is integrated to get velocity and then velocity is integrated to get position. 
+function integrate()  // Determine position of object based on acceleration through time. Performs pseudo-double-integration. Acceleration is integrated to get velocity and then velocity is integrated to get position. 
 {
   let deltaVelocity = incPlane()*0.1;
   velocity = velocity + deltaVelocity;
