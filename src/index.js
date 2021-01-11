@@ -101,7 +101,7 @@ var timerClr = function(){ // clears intervals for interval functions.
 }
 
 function veloDisp(){  // displays current velocity. Updates every 10ms.
-  dispVelo=parseFloat(velocity.toFixed(2));
+  dispVelo=parseFloat((velocity/10).toFixed(2));
   document.getElementById("veloDisp").innerHTML = `v: ${dispVelo}m/s`;
 }
 

@@ -29,6 +29,7 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
+  font-size: 1vh;
 }
 h2 {
   font-size: 2vh;
