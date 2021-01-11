@@ -16,7 +16,9 @@ let deltaVelocity = 0;
 let deltaPosition = 0;
 
 const userInputs = (ev)=>{    // USER INPUTS FUNCTION RUNS EVERY TIME THE RUN BUTTON IS CLICKED AND CALLS OTHER FUNCTIONS
+
   ev.preventDefault(); // stops form from submitting
+
 mass = document.getElementById("massInput").value || 3; // sets mass to input value or 3.
 coefFrict = document.getElementById("coefFrictInput").value || 0.43;  // sets coefficient of friction to input value or 0.43
 rampLength = document.getElementById("rampLengthInput").value*100 || 600; // sets ramp length to input value times 100 or 600
@@ -27,6 +29,10 @@ position = 0;  // these set starting values
 velocity = 0;
 deltaVelocity = 0;
 deltaPosition = 0;
+
+integrate(); 
+incPlane();
+drawObject();
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{     //RUNS THESE FUNCTIONS WHEN THE BUTTON IS CLICKED //add to user inputs
@@ -66,6 +72,8 @@ var fNormal;
 var fFriction;
 var netGravityX;
 
+
+
 var timer = function(){  //function to allow for time display. interval of 10ms.
 
   currTime = currTime + 0.01
@@ -100,7 +108,7 @@ function veloDisp(){  // displays current velocity. Updates every 10ms.
 intervalSet();  // run the interval, inclined plane, and timer functions
 timer();
 incPlane();
-integrate(); 
+
 
 function incPlane()     // recalculates values based on user setting
 {
