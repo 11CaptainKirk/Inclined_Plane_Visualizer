@@ -164,11 +164,11 @@ function ffDisp(){ // display force of friction
 }
 function statffDisp(){ // display force of friction
   dispstatFf=parseFloat(fstatFrict.toFixed(2));
-  document.getElementById("statffDisp").innerHTML = `Ff<sub>s</sub>: ${dispstatFf}N`;
+  document.getElementById("statffDisp").innerHTML = `Ff<sub>s<small><sub>(max)</sub></small></sub>: ${dispstatFf}N`;
 }
 function netFDisp(){ // display net force on the object
   dispNetF=parseFloat(netGravityX.toFixed(2));
-  document.getElementById("netFDisp").innerHTML = `ΣF: ${dispNetF}N`;
+  document.getElementById("netFDisp").innerHTML = `ΣF<sub>||</sub>: ${dispNetF}N`;
 }
 
 function integrate()  // Determine position of object based on acceleration through time. Performs pseudo-double-integration. Acceleration is integrated to get velocity and then velocity is integrated to get position. 
