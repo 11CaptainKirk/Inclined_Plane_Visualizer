@@ -5,6 +5,7 @@ Hosted with Amazon Web Services Amplify on rkirk.us
 Not intended for commercial use.
 Copyright 2021 Robert Kirk. All Rights Reserved.*/
 
+
 var delta = 0;  // these define global variables
 let mass = 3; // Mass in Kg
 let coefFrict = 0.25; // Coefficient of Friction
@@ -83,8 +84,6 @@ var netGravityX;
 var dispstatFf;
 
 
-
-
 var timer = function(){  //function to allow for time display. interval of 10ms.
 
   currTime = currTime + 0.01
@@ -136,13 +135,12 @@ function incPlane()     // recalculates values based on user setting
   fGravityX = (mass*gravity)*(Math.sin(angleElevRad)); // Gravity X before friction
   netStat = ((appForce/1)+fGravityX) - fstatFrict 
   netGravityX = ((appForce/1)+fGravityX)-fFriction; // Net Force of Gravity X
-    if (netStat < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
+    if (netStat <= 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
       netGravityX = 0;
     }
-    if (netGravityX < 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
+    if (netGravityX <= 0){  // if the friction force is greater than the gravity force, set the net force to zero because the object doesn't move. 
       netGravityX = 0;
     }
-    console.log(netGravityX)
   acceleration = netGravityX/mass; // Acceleration of the object in m/s^2
 return acceleration; // output the acceleration from the function
 }
